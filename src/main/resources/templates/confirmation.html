@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template1">
+<head>
+<meta charset="UTF-8">
+<title>Product Form</title>
+</head>
+<body>
+	<div layout:fragment="pageContent">
+
+
+		<div class="container m-5">
+			<div class="card">
+				<div class="card-header text-white bg-success mb-3">Enregistrement
+					effectué</div>
+				<div class="card-body">
+					<div class="form-group">
+						<label>ID :</label> <strong> <label
+							th:text="${product.id}"></label></strong>
+					</div>
+
+					<div class="form-group">
+						<label>Label :</label> <strong> <label
+							th:text="${product.label}"></label></strong>
+					</div>
+					<div class="form-group">
+						<label>Price :</label> <strong> <label
+							th:text="${product.price}"></label></strong>
+					</div>
+					<div class="form-group">
+						<label>Quantity :</label> <strong> <label
+							th:text="${product.quantity}"></label></strong>
+					</div>
+					<div class="form-group">
+						<label>Add Date :</label> <strong> <label
+							th:text="${product.add_date}"></label></strong>
+					</div>
+					<div class="form-group">
+						<label>Available :</label> <strong> <label
+							th:text="${product.available}"></label>
+						</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

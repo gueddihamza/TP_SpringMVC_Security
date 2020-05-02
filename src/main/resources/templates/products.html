@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+			xmlns:layout="ultraq.net.nz/thymeleaf/layout"
+			 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+			layout:decorator="template1">
+<head>
+<meta charset="UTF-8">
+<title>Products Page</title>
+</head>
+<body>
+<div layout:fragment="pageContent">
+
+	<div class="card m-5">
+		<div class="card-header">Products List</div>
+		<div class="card-body">
+				<form th:action="@{products}" method="get">
+					<label for="keyword">Keyword :</label>
+					<input type="text" name="keyword" th:value="${keyword}"  />
+					<button class="btn btn-primary">Search</button>
+				</form>
+			<table class="table mt-5" >
+				<tr>
+				<th>ID</th>
+				<th>Label</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Add Date</th>
+				<th>Available</th>
+				<th sec:authorize="hasRole('ROLE_ADMIN')" colspan="2">Actions</th>
+				</tr>
+				<tr th:each="p:${productsListPage.content}" >
+					<td th:text="${p.id}"></td>
+					<td th:text="${p.label}"></td>
+					<td th:text="${p.price}"></td>
+					<td th:text="${p.quantity}"></td>
+					<td th:text="${p.add_date}"></td>
+					<td th:text="${p.available}"></td>
+					
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a onclick="javascript:return confirm('Are you sure you want to delete this?')"  class="btn btn-danger" th:href="@{deleteProduct(id=${p.id} , page=${currentPage} , size=${size} , keyword=${keyword})}">Delete</a> </td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary" th:href="@{editProduct(id=${p.id})}">Edit</a> </td>
+				</tr>
+			</table>
+			<ul class="nav nav-pills">
+				<li th:each="page,status:${pages}" >
+				<a th:class="${status.index==currentPage? 'btn btn-primary' : 'btn'    }"
+					th:href="@{products(page=${status.index}, size=${size}, keyword=${keyword})}" th:text="${status.index}"></a>
+				</li>
+			
+			</ul>
+		
+		
+		</div>
+</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template1">
+<head>
+<meta charset="UTF-8">
+<title>Product Form</title>
+</head>
+<body>
+	<div layout:fragment="pageContent">
+
+
+		<div class="container m-5">
+			<div class="card">
+				<div class="card-header" th:if="${mode=='new'}">Add a product</div>
+				<div class="card-header" th:if="${mode=='edit'}">Edit a
+					product</div>
+				<div class="card-body">
+					<form th:action="@{saveProduct}" method="post">
+
+						<div class="form-group">
+							<label class="control-label">ID:</label> <input
+								class="form-control" type="text" name="id"
+								th:value="${product.id}" readonly="readonly" /> <span
+								th:errors=${product.id} class="text-danger"></span>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label">Label:</label> <input
+								class="form-control" type="text" name="label"
+								th:value="${product.label}" /> <span th:errors=${product.label}
+								class="text-danger"></span>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label">Price:</label> <input
+								class="form-control" type="number" step="0.01" name="price"
+								th:value="${product.price}" /> <span th:errors=${product.price}
+								class="text-danger"></span>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label">Quantity:</label> <input
+								class="form-control" type="number" name="quantity"
+								th:value="${product.quantity}" /> <span
+								th:errors=${product.quantity} class="text-danger"></span>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label">Add Date:</label> <input
+								class="form-control" type="date" name="add_date"
+								th:value="${product.add_date}" /> <span
+								th:errors=${product.add_date} class="text-danger"></span>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label">Available:</label> <input
+								type="checkbox" name="available"
+								th:checked="${product.available}" /> <span
+								th:errors=${product.available} class="text-danger"></span>
+						</div>
+						<button class="btn btn-primary" type="submit">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
